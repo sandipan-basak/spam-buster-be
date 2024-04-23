@@ -3,7 +3,7 @@ module.exports = {
         "browser": true,
         "es2021": true
     },
-    "extends": "standard-with-typescript",
+    extends: 'love',
     "overrides": [
         {
             "env": {
@@ -34,6 +34,7 @@ module.exports = {
             {
               "checksVoidReturn": false
             }
-        ]
+        ],
+        "indent": ["error", 2]
     }
 }
