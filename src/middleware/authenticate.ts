@@ -2,7 +2,11 @@ import { type Request, type Response, type NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { signupSchema } from '~/utils/validator';
 
-const secretKey = process.env.SECRET_KEY ?? 'secret_key';
+if (typeof process.env.SECRET_KEY === 'undefined' || process.env.SECRET_KEY === '') {
+  throw new Error('SECRET_KEY is not set.');
+}
+
+const secretKey = process.env.SECRET_KEY;
 
 export const authenticate = (req: Request, res: Response, next: NextFunction): any => {
   const cookieHeader = req.headers.cookie;
