@@ -14,8 +14,8 @@ const app = (0, express_1.default)();
 const port = process.env.PORT;
 app.use(express_1.default.json());
 // Server started
-app.get('/', (_, res) => {
-    res.send('Backend server running!!');
+app.get('/api', (_, res) => {
+    res.send('<h5>Deployed serverless express api</h5>');
 });
 app.use('/user', userRoutes_1.default);
 app.use('/spam', spamRoutes_1.default);

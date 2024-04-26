@@ -13,8 +13,8 @@ const port = process.env.PORT;
 app.use(express.json());
 
 // Server started
-app.get('/', (_, res) => {
-  res.send('Backend server running!!');
+app.get('/api', (_, res) => {
+  res.send('<h5>Deployed serverless express api</h5>');
 });
 
 app.use('/user', userRoutes);

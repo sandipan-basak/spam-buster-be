@@ -45,7 +45,7 @@ To run the service you can follow the scripts under `package.json`
 ### build server: `pnpm run build`
 ### production server: `pnpm run start`
 
-Can check out the different routes under the **routes** folder in **src** folder.
+Can check out the different routes under the **routes** folder in **api** folder.
 
 ## Routes
 - **User Routes:**
