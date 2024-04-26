@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc && npx tsc-alias -p tsconfig.json",
-    "start": "node -r tsconfig-paths/register dist/app.js",
+    "start": "NODE_ENV=production node -r tsconfig-paths/register dist/app.js",
     "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/app.ts",
     "lint-fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'"
   },
