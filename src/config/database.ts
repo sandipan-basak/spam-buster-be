@@ -16,7 +16,8 @@ function getEnvironment (defaultEnv: Environment): Environment {
   return env as Environment;
 }
 
-const env: Environment = getEnvironment('development'); const config = AllConfig[env];
+const env: Environment = getEnvironment('development');
+const config = AllConfig[env];
 
 const username = config.username ?? throwConfigError('DB_USERNAME');
 const password = config.password ?? throwConfigError('DB_PASSWORD');

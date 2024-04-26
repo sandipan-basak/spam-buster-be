@@ -1,7 +1,25 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '~/config/database';
 
-class Spam extends Model { }
+interface SpamAttributes {
+  id?: bigint
+  phone_number: string
+  name?: string
+  report_count?: number
+  first_reported_by_user_id: bigint
+  created_at?: Date
+  updated_at?: Date
+}
+
+class Spam extends Model implements SpamAttributes {
+  public id?: bigint;
+  public phone_number!: string;
+  public name?: string;
+  public report_count?: number;
+  public first_reported_by_user_id!: bigint;
+  public readonly created_at!: Date;
+  public readonly updated_at!: Date;
+}
 
 Spam.init({
   id: {
@@ -28,13 +46,16 @@ Spam.init({
       key: 'id'
     }
   },
+  name: {
+    type: DataTypes.TEXT
+  },
   updated_at: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
   }
 }, {
   sequelize,
-  modelName: 'spam',
+  modelName: 'Spam',
   timestamps: true,
   createdAt: 'created_at',
   updatedAt: 'updated_at'

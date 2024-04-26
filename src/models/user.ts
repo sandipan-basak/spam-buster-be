@@ -1,4 +1,4 @@
-import { Model, DataTypes, type Optional } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '~/config/database';
 
 interface UserAttributes {
@@ -11,9 +11,7 @@ interface UserAttributes {
   updated_at?: Date
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'created_at' | 'updated_at'> {}
-
-class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+class User extends Model implements UserAttributes {
   public id!: bigint;
   public name!: string;
   public email?: string | null;
@@ -51,7 +49,7 @@ User.init({
   }
 }, {
   sequelize,
-  modelName: 'user',
+  modelName: 'User',
   timestamps: true,
   createdAt: 'created_at',
   updatedAt: 'updated_at'

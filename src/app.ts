@@ -1,12 +1,14 @@
+/* eslint-disable import/first */
 import dotenv from 'dotenv';
+dotenv.config({ path: './.env' });
 
 import express from 'express';
 import userRoutes from '~/routes/userRoutes';
-dotenv.config({ path: './.env' });
+import spamRoutes from '~/routes/spamRoutes';
+import searchRoutes from '~/routes/searchRoutes';
 
 const app = express();
 const port = process.env.PORT;
-console.log(process.env.PORT);
 
 app.use(express.json());
 
@@ -15,7 +17,9 @@ app.get('/', (_, res) => {
   res.send('Backend server running!!');
 });
 
-app.use('/users', userRoutes);
+app.use('/user', userRoutes);
+app.use('/spam', spamRoutes);
+app.use('/search', searchRoutes);
 
 app.listen(port, () => {
   console.log(`App listening on port http://localhost:${port}`);

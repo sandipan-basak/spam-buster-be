@@ -1,9 +1,7 @@
-// Controller/userController.ts
 import { type Response, type NextFunction, type Request } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '~/models/user';
-import { type UpdateUserRequestBody } from '~/config/domain/user';
 
 export const createUser = async (req: {
   body: {
@@ -25,7 +23,7 @@ export const createUser = async (req: {
 
     // Create a JWT token
     const token = jwt.sign(
-      { userId: newUser.id, name: newUser.name, email: newUser.email },
+      { id: newUser.id, name: newUser.name, email: newUser.email },
       process.env.SECRET_KEY ?? 'secret_key',
       { expiresIn: '7d' }
     );
@@ -59,11 +57,17 @@ export const logOutUser = (req: Request, res: Response, next: NextFunction): voi
   }
 };
 
-export const updateUser = async (req: Request<any, any, UpdateUserRequestBody>, res: Response): Promise<void> => {
-  const { userId, name, email, phoneNumber, password } = req.body;
+export const updateUser = async (req: Request<any, any, {
+  name?: string
+  email?: string
+  user: User
+  password?: string
+}>, res: Response): Promise<void> => {
+  const { user, name, email, password } = req.body;
 
   try {
-    const userToUpdate = await User.findByPk(userId);
+    console.log('user details: ', user);
+    const userToUpdate = await User.findByPk(user.id);
     if (userToUpdate == null) {
       res.status(404).json({ message: 'User not found.' });
       return;
@@ -76,7 +80,10 @@ export const updateUser = async (req: Request<any, any, UpdateUserRequestBody>, 
 
     userToUpdate.name = name ?? userToUpdate.name;
     userToUpdate.email = email ?? userToUpdate.email;
-    userToUpdate.phone_number = phoneNumber ?? userToUpdate.phone_number;
+    console.log('new name and email: ', userToUpdate.name, userToUpdate.email);
+
+    // not allowing phone_number change
+    // userToUpdate.phone_number = phoneNumber ?? userToUpdate.phone_number;
 
     await userToUpdate.save();
 
@@ -93,7 +100,7 @@ export const updateUser = async (req: Request<any, any, UpdateUserRequestBody>, 
 };
 
 export const deleteUser = async (req: Request, res: Response): Promise<void> => {
-  const userId = req.params.userId; // Assuming userID is passed as a URL parameter
+  const userId = req.params.id;
 
   try {
     const userToDelete = await User.findByPk(userId);
@@ -133,7 +140,7 @@ export const loginUser = async (req: Request<any, any, {
     }
 
     const token = jwt.sign(
-      { userId: user.id, email: user.email },
+      { id: user.id, email: user.email },
       process.env.SECRET_KEY ?? 'default_secret_key',
       { expiresIn: '1h' }
     );

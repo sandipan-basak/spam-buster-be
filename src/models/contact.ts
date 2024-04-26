@@ -1,7 +1,28 @@
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes, type Association } from 'sequelize';
+import type User from '~/models/user';
 import { sequelize } from '~/config/database';
 
-class Contact extends Model { }
+interface ContactAttributes {
+  id: string
+  name: string
+  phone_number: string
+  user_id: bigint
+  created_at?: Date
+  updated_at?: Date
+}
+
+class Contact extends Model implements ContactAttributes {
+  public id!: string;
+  public name!: string;
+  public phone_number!: string;
+  public user_id!: bigint;
+  public readonly created_at?: Date;
+  public readonly updated_at?: Date;
+
+  public static associations: {
+    User: Association<Contact, User>
+  };
+}
 
 Contact.init({
   id: {
@@ -34,7 +55,7 @@ Contact.init({
   }
 }, {
   sequelize,
-  modelName: 'contact',
+  modelName: 'Contact',
   timestamps: true,
   createdAt: 'created_at',
   updatedAt: 'updated_at'
