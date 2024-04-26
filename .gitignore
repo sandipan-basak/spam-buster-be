@@ -1,8 +1,6 @@
 node_modules/
 
 # TypeScript compiled output
-dist/
-public
 
 # Environment configuration files
 .env*
