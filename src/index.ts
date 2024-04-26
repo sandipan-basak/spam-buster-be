@@ -24,3 +24,5 @@ app.use('/search', searchRoutes);
 app.listen(port, () => {
   console.log(`App listening on port http://localhost:${port}`);
 });
+
+export default app;
