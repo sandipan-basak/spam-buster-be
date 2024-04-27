@@ -22,7 +22,7 @@ app.use('/spam', spamRoutes);
 app.use('/search', searchRoutes);
 
 app.listen(port, () => {
-  console.log(`App listening on port http://localhost:${port}`);
+  console.log(`App listening on port:${port}`);
 });
 
 export default app;
