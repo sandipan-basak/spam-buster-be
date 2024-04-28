@@ -29,10 +29,10 @@ Before running the application, ensure you have a `.env` file in the project roo
 
 ```env
 PORT=3000
-DB_USERNAME=''
-DB_PASSWORD=''
+DB_USERNAME='your db username'
+DB_PASSWORD='your db password'
 DB_NAME=postgres
-DB_HOST=''
+DB_HOST='your db host'
 SECRET_KEY=jkh123vb4jh12b4!&*!
 ```
 
@@ -69,3 +69,14 @@ POST /search/findByName
 POST /search/findByNumber
 GET /details/:belongsTo/:id
 ```
+
+## Database filling Script
+You can run the script using `pnpm run fill-db`
+
+Before running the script, ensure you have a `.env` file in the project root with the following configurations:
+
+```env
+SUPABASE_KEY=<your supabase key>
+SUPABASE_URL=<your supabase url>
+```
+

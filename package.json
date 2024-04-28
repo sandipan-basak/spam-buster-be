@@ -9,7 +9,7 @@
     "start": "NODE_ENV=production node -r tsconfig-paths/register public/index.js",
     "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only -r tsconfig-paths/register api/index.ts",
     "lint-fix": "eslint --fix 'api/**/*.{js,jsx,ts,tsx}'",
-    "filldb": "node scripts/dbFill.js"
+    "fill-db": "node scripts/dbFill.js"
   },
   "keywords": [],
   "dependencies": {
