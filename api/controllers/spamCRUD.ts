@@ -6,9 +6,10 @@ import { sequelize } from '~/config/database';
 
 export const reportSpam = async (req: Request<any, any, {
   phoneNumber: string
+  name?: string
   user: User
 }>, res: Response): Promise<void> => {
-  const { phoneNumber, user } = req.body;
+  const { phoneNumber, user, name } = req.body;
 
   try {
     const spamReportRecord = await SpamReport.findOne({
@@ -32,6 +33,7 @@ export const reportSpam = async (req: Request<any, any, {
       spamRecord = await Spam.create({
         phone_number: phoneNumber,
         report_count: 1,
+        name: name ?? null,
         first_reported_by_user_id: user.id
       });
     }

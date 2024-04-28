@@ -111,5 +111,5 @@
   "include": [
     "api/**/*",
   ],
-  "exclude": ["node_modules", "dist", "public"]
+  "exclude": ["node_modules", "dist", "public", "scripts"]
 }

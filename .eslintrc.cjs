@@ -22,7 +22,8 @@ module.exports = {
         "sourceType": "module"
     },
     "ignorePatterns": [
-        "*.cjs"
+        "*.cjs",
+        'scripts/**',
     ],
     "rules": {
         "object-curly-spacing": ["error", "always"],
